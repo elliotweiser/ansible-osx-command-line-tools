@@ -4,7 +4,7 @@ dependency:
 driver:
   name: vagrant
 molecule:
-  ignore_files:
+  ignore_paths:
     - .git
     - .venv
 ansible:
@@ -26,3 +26,5 @@ vagrant:
         - group1
 verifier:
   name: testinfra
+  options:
+    verbose: true

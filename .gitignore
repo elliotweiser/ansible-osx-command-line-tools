@@ -1,4 +1,7 @@
 .molecule/
 .vagrant/
 playbook.retry
-.venv
+.venv/
+.cache/
+*.pyc
+tests/__pycache__/
