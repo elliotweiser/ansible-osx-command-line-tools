@@ -1,0 +1,28 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+molecule:
+  ignore_files:
+    - .git
+    - .venv
+ansible:
+  playbook: playbook.yml
+vagrant:
+  platforms:
+    - name: jhcook/macos-sierra
+      box: jhcook/macos-sierra
+      version: 10.12.2
+  providers:
+    - name: virtualbox
+      type: virtualbox
+      options:
+        memory: 2048
+        cpus: 4
+  instances:
+    - name: ansible-osx-command-line-tools
+      ansible_groups:
+        - group1
+verifier:
+  name: testinfra

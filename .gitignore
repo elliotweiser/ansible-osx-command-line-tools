@@ -1,0 +1,4 @@
+.molecule/
+.vagrant/
+playbook.retry
+.venv

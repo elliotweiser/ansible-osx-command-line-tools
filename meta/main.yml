@@ -1,0 +1,20 @@
+galaxy_info:
+  author: Elliot Weiser
+  description: Installs OS X Command Line Tools
+
+  license: MIT
+
+  min_ansible_version: 1.2
+
+  platforms:
+    - name: MacOSX
+      versions:
+        - 10.12
+
+  galaxy_tags:
+    - 'mac'
+    - 'osx'
+    - 'command line tools'
+    - 'sierra'
+
+dependencies: []

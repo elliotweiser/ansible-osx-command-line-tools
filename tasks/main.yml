@@ -1,0 +1,41 @@
+---
+# tasks file for ansible-osx-command-line-tools
+
+- name: Am I running on Mac OS X?
+  fail:
+    msg: Target host is not running Mac OS X
+  when: ansible_distribution != 'MacOSX'
+
+- name: Check that command line tools are installed
+  shell: /usr/bin/xcode-select -print-path
+  register: xcode_select_res
+  ignore_errors: true
+  changed_when: false
+
+- name: Check if the path to the git executable exists
+  stat:
+    path: /usr/bin/git
+  register: git_stat
+
+- name: Prepare to install Command Line Tools
+  file:
+    path: /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    state: touch
+  when: xcode_select_res.stdout|length == 0 or not git_stat.stat.exists
+
+- name: Check for Command Line Tools in Software Update list
+  shell: softwareupdate -l | grep -B 1 -E 'Command Line Tools' | awk -F'*' '/^ +\*/ {print $2}' | sed 's/^ *//' | head -n1
+  register: su_list
+  when: xcode_select_res.stdout|length == 0 or not git_stat.stat.exists
+  changed_when: false
+  failed_when: su_list.rc != 0 or su_list.stdout|length == 0
+
+- name: Install Command Line Tools
+  shell: softwareupdate -i '{{ su_list.stdout }}'
+  when: xcode_select_res.stdout|length == 0 or not git_stat.stat.exists
+
+- name: Cleanup
+  file:
+    path: /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    state: absent
+  when: xcode_select_res.stdout|length == 0 or not git_stat.stat.exists
