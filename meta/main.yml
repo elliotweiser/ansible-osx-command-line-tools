@@ -14,7 +14,8 @@ galaxy_info:
   galaxy_tags:
     - 'mac'
     - 'osx'
-    - 'command line tools'
+    - 'command-line'
+    - 'tools'
     - 'sierra'
 
 dependencies: []
