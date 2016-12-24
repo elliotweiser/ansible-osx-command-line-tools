@@ -12,12 +12,14 @@ galaxy_info:
         - 10.12
 
   galaxy_tags:
-    - 'command_line_tools'
+    - 'command'
     - 'development'
     - 'elliotweiser'
     - 'headless'
+    - 'line'
     - 'mac'
     - 'osx'
     - 'sierra'
+    - 'tools'
 
 dependencies: []
