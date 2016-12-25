@@ -65,17 +65,6 @@ matrix:
      env: ANSIBLE_VERSION=1.9.6
 
 before_install:
-  # Unwind the developer environment
-  - 'curl -sLO https://raw.githubusercontent.com/Homebrew/install/master/uninstall'
-  - chmod +x uninstall
-  - ./uninstall --force
-  - rm -rf /usr/local/Homebrew
-  - sudo rm -rf /usr/local/Caskroom
-  - sudo rm -rf /usr/local/bin/brew
-  - sudo rm -rf /Applications/Xcode.app
-  - sudo rm -rf /Library/Developer/CommandLineTools
-
-install:
   # Install pip
   - sudo easy_install pip
 
@@ -88,6 +77,23 @@ install:
   - sudo -H pip install ansible-lint
   - ansible --version
   - ansible-lint --version
+
+  # Unwind the developer environment
+  - 'curl -sLO https://raw.githubusercontent.com/Homebrew/install/master/uninstall'
+  - chmod +x uninstall
+  - ./uninstall --force
+  - rm -rf /usr/local/Homebrew
+  - sudo rm -rf /usr/local/Caskroom
+  - sudo rm -rf /usr/local/bin/brew
+  - sudo rm -rf /Applications/Xcode.app
+  - sudo rm -rf /Library/Developer/CommandLineTools
+
+  # Verify required tools are still useable
+  - ansible --version
+  - ansible-lint --version
+
+install:
+  - echo 'Nothing else to install!'
 
 script:
   # Check the role/playbook's syntax.
