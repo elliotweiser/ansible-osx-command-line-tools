@@ -33,9 +33,5 @@
 - name: Install Command Line Tools
   command: softwareupdate -i '{{ su_list.stdout }}'
   when: xcode_select_res.stdout|length == 0 or not git_stat.stat.exists
-
-- name: Cleanup
-  file:
-    path: /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-    state: absent
-  when: xcode_select_res.stdout|length == 0 or not git_stat.stat.exists
+  notify:
+    - Cleanup

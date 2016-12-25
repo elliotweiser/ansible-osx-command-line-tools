@@ -1,4 +1,5 @@
 import testinfra.utils.ansible_runner
+import re
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     '.molecule/ansible_inventory').get_hosts('all')
@@ -27,4 +28,4 @@ def test_xcode_select_print_path(Command):
 def test_git_is_useable(Command):
     c = Command('/usr/bin/git --version')
     assert c.rc == 0
-    assert c.stdout == 'git version 2.10.1 (Apple Git-78)'
+    assert re.match('^git version \d+(.\d+)* \(Apple Git-\d+\)$', c.stdout)

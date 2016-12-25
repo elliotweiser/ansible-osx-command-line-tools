@@ -1,2 +1,7 @@
 ---
 # handlers file for ansible-osx-command-line-tools
+
+- name: Cleanup
+  file:
+    path: /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    state: absent

@@ -4,22 +4,25 @@ galaxy_info:
 
   license: MIT
 
-  min_ansible_version: 1.2
+  min_ansible_version: 1.9
 
   platforms:
     - name: MacOSX
       versions:
         - 10.12
+        - 10.11
+        - 10.10
 
   galaxy_tags:
-    - 'command'
-    - 'development'
-    - 'elliotweiser'
-    - 'headless'
-    - 'line'
-    - 'mac'
-    - 'osx'
-    - 'sierra'
-    - 'tools'
+    - command
+    - development
+    - elcapitan
+    - headless
+    - line
+    - mac
+    - osx
+    - sierra
+    - tools
+    - yosemite
 
 dependencies: []

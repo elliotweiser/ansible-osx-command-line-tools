@@ -11,9 +11,15 @@ ansible:
   playbook: playbook.yml
 vagrant:
   platforms:
-    - name: jhcook/macos-sierra
+    - name: sierra
       box: jhcook/macos-sierra
-      version: 10.12.2
+      box_version: 10.12.2
+    - name: el-capitan
+      box: jhcook/osx-elcapitan-10.11
+      box_version: 10.11.6
+    - name: yosemite
+      box: jhcook/osx-yosemite-10.10
+      box_version: 10.10.5
   providers:
     - name: virtualbox
       type: virtualbox
