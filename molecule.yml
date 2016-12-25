@@ -8,7 +8,7 @@ molecule:
     - .git
     - .venv
 ansible:
-  playbook: playbook.yml
+  playbook: tests/playbook.yml
 vagrant:
   platforms:
     - name: sierra

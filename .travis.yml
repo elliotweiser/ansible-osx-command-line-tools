@@ -1,0 +1,57 @@
+---
+sudo: required
+language: objective-c
+env:
+ - ANSIBLE_VERSION=2.2.0.0
+ - ANSIBLE_VERSION=2.1.3.0
+ - ANSIBLE_VERSION=2.0.2.0
+ - ANSIBLE_VERSION=1.9.6
+osx_image:
+ # Sierra
+ - xcode8.2
+ # El Capitan
+ - xcode7.3
+ # Yosemite
+ - xcode6.4
+
+before_install:
+  # Unwind the developer environment
+  - 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"'
+  - rm -rf /usr/local/Homebrew
+  - rm -rf /usr/local/Caskroom
+  - rm -rf /usr/local/bin/brew
+  - sudo rm -rf /Applications/Xcode.app
+  - sudo rm -rf /Library/Developer/CommandLineTools
+
+install:
+  # Check Python and Pip versions
+  - python --version
+  - pip --version
+
+  # Install Ansible and Ansible-Lint
+  - sudo pip install ansible==${ANSIBLE_VERSION}
+  - sudo pip install ansible-lint
+  - ansible --version
+  - ansible-lint --version
+
+script:
+  # Check the role/playbook's syntax.
+  - ansible-playbook tests/playbook.yml --syntax-check
+
+  # Lint the playbook.
+  - ansible-lint tests/playbook.yml
+
+  # Test the playbook.
+  - ansible-playbook tests/playbook.yml --inventory-file=tests/inventory
+
+  # Test the playbook's idempotence.
+  # (From https://github.com/geerlingguy/ansible-role-homebrew/blob/master/.travis.yml#L36-L43)
+  - idempotence=$(mktemp)
+  - "ansible-playbook tests/test.yml | tee -a ${idempotence}"
+  - >
+    tail ${idempotence}
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
