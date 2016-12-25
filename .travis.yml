@@ -76,6 +76,9 @@ before_install:
   - sudo rm -rf /Library/Developer/CommandLineTools
 
 install:
+  # Install pip
+  - sudo easy_install pip
+
   # Check Python and Pip versions
   - python --version
   - pip --version
