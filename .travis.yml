@@ -84,8 +84,8 @@ install:
   - pip --version
 
   # Install Ansible and Ansible-Lint
-  - sudo pip install ansible==${ANSIBLE_VERSION}
-  - sudo pip install ansible-lint
+  - sudo -H pip install ansible==${ANSIBLE_VERSION}
+  - sudo -H pip install ansible-lint
   - ansible --version
   - ansible-lint --version
 
