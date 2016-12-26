@@ -104,7 +104,7 @@ install:
 
 script:
   # Check the role/playbook's syntax.
-  - ansible-playbook tests/playbook.yml --syntax-check
+  - ansible-playbook tests/playbook.yml --syntax-check --inventory-file=tests/inventory
 
   # Lint the playbook.
   - ansible-lint tests/playbook.yml
