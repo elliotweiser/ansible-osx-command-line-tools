@@ -115,7 +115,7 @@ script:
   # Test the playbook's idempotence.
   # (From https://github.com/geerlingguy/ansible-role-homebrew/blob/master/.travis.yml#L36-L43)
   - idempotence=$(mktemp)
-  - "ansible-playbook tests/test.yml | tee -a ${idempotence}"
+  - "ansible-playbook tests/playbook.yml --inventory-file=tests/inventory | tee -a ${idempotence}"
   - >
     tail ${idempotence}
     | grep -q 'changed=0.*failed=0'
