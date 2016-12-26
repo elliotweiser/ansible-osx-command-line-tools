@@ -73,8 +73,13 @@ before_install:
   - pip --version
 
   # Install Ansible and Ansible-Lint
-  - sudo -H pip install ansible==${ANSIBLE_VERSION}
-  - sudo -H pip install ansible-lint
+  - sudo -H pip install -U virtualenv
+  - ls -l /usr/bin/python
+  - virtualenv --python=/usr/bin/python .venv
+  - virtualenv --version
+  - source .venv/bin/activate
+  - pip install ansible==${ANSIBLE_VERSION}
+  - pip install ansible-lint
   - ansible --version
   - ansible-lint --version
 
@@ -89,6 +94,8 @@ before_install:
   - sudo rm -rf /Library/Developer/CommandLineTools
 
   # Verify required tools are still useable
+  - which python
+  - ls -l $(which python)
   - ansible --version
   - ansible-lint --version
 
