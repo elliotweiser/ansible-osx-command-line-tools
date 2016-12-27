@@ -9,9 +9,9 @@ galaxy_info:
   platforms:
     - name: MacOSX
       versions:
-        - 10.12
-        - 10.11
-        - 10.10
+        - '10.12'
+        - '10.11'
+        - '10.10'
 
   galaxy_tags:
     - command

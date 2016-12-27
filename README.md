@@ -51,10 +51,21 @@ Now you can setup your virtual environment for testing:
 ```bash
 virtualenv --python=$(which python2.7) .venv
 source .venv/bin/activate
-pip install -r test-requirements.txt
+pip install -r --no-deps test-requirements.txt
 ```
 
-Use `molecule` commands for testing.
+Run the full test suite against the default platform. The default platform is
+`sierra`:
+
+```bash
+molecule test
+```
+
+Run the full test suite on a different platform:
+
+```bash
+molecule test --platform yosemite
+```
 
 License
 -------
