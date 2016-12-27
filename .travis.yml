@@ -68,20 +68,14 @@ before_install:
   # Install pip
   - sudo easy_install pip
 
-  # Check Python and Pip versions
-  - python --version
-  - pip --version
-
-  # Install Ansible and Ansible-Lint
+  # Setup virtualenv
   - sudo -H pip install -U virtualenv
   - ls -l /usr/bin/python
   - virtualenv --python=/usr/bin/python .venv
   - virtualenv --version
   - source .venv/bin/activate
-  - pip install ansible==${ANSIBLE_VERSION}
-  - pip install ansible-lint
-  - ansible --version
-  - ansible-lint --version
+  - pip install -U pip
+  - pip install --no-deps -r tests/test-requirements-ansible-${ANSIBLE_VERSION}.txt
 
   # Unwind the developer environment
   - 'curl -sLO https://raw.githubusercontent.com/Homebrew/install/master/uninstall'
@@ -93,14 +87,12 @@ before_install:
   - sudo rm -rf /Applications/Xcode.app
   - sudo rm -rf /Library/Developer/CommandLineTools
 
-  # Verify required tools are still useable
-  - which python
-  - ls -l $(which python)
+install:
+  # Check versions
+  - python --version
   - ansible --version
   - ansible-lint --version
-
-install:
-  - echo 'Nothing else to install!'
+  - testinfra --version
 
 script:
   # Check the role/playbook's syntax.
@@ -115,11 +107,17 @@ script:
   # Test the playbook's idempotence.
   # (From https://github.com/geerlingguy/ansible-role-homebrew/blob/master/.travis.yml#L36-L43)
   - idempotence=$(mktemp /private/tmp/XXXXXXXXX)
-  - "ansible-playbook tests/playbook.yml --inventory-file=tests/inventory | tee -a ${idempotence}"
+  - 'ansible-playbook tests/playbook.yml --inventory-file=tests/inventory | tee -a ${idempotence}'
   - >
     tail ${idempotence}
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
+
+  # Test host state
+  - >
+    testinfra --connection=ansible
+    --ansible-inventory=tests/inventory
+    --hosts=localhost --verbose tests/
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

@@ -34,3 +34,5 @@ verifier:
   name: testinfra
   options:
     verbose: true
+    connection: ansible
+    ansible_inventory: .molecule/ansible_inventory
