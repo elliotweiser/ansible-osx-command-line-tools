@@ -51,7 +51,7 @@ Now you can setup your virtual environment for testing:
 ```bash
 virtualenv --python=$(which python2.7) .venv
 source .venv/bin/activate
-pip install -r --no-deps test-requirements.txt
+pip install --no-deps -r test-requirements.txt
 ```
 
 Run the full test suite against the default platform. The default platform is
