@@ -1,11 +1,11 @@
-ansible==2.2.0.0
-ansible-lint==3.4.9
+ansible==2.2.1.0
+ansible-lint==3.4.10
 cffi==1.9.1
 cryptography==1.7.1
 enum34==1.1.6
 idna==2.2
-ipaddress==1.0.17
-Jinja2==2.8
+ipaddress==1.0.18
+Jinja2==2.8.1
 MarkupSafe==0.23
 paramiko==2.1.1
 py==1.4.32
@@ -15,4 +15,4 @@ pycrypto==2.6.1
 pytest==3.0.5
 PyYAML==3.12
 six==1.10.0
-testinfra==1.4.5
+testinfra==1.5.2
