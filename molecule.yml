@@ -13,8 +13,8 @@ vagrant:
   platforms:
     - name: sierra
       box: jhcook/macos-sierra
-      box_version: 10.12.2
-    - name: el-capitan
+      box_version: 10.12.3
+    - name: elcapitan
       box: jhcook/osx-elcapitan-10.11
       box_version: 10.11.6
     - name: yosemite
@@ -26,10 +26,14 @@ vagrant:
       options:
         memory: 2048
         cpus: 4
+        gui: true
+        name: "\"macosx-#{driver_config['current_platform']}-clt\""
   instances:
-    - name: ansible-osx-command-line-tools
+    - name: macosx
+      options:
+        append_platform_to_hostname: yes
       ansible_groups:
-        - group1
+        - osx
 verifier:
   name: testinfra
   options:
