@@ -1,2 +1,4 @@
 ---
 # vars file for ansible-osx-command-line-tools
+
+clt_path: /Library/Developer/CommandLineTools

@@ -36,7 +36,6 @@ before_install:
   - rm -rf /usr/local/Homebrew
   - sudo rm -rf /usr/local/Caskroom
   - sudo rm -rf /usr/local/bin/brew
-  - sudo rm -rf /Applications/Xcode.app
   - sudo rm -rf /Library/Developer/CommandLineTools
 
 install:
@@ -48,19 +47,19 @@ install:
 
 script:
   # Check the role/playbook's syntax.
-  - ansible-playbook tests/playbook.yml --syntax-check --inventory-file=tests/inventory
+  - ansible-playbook tests/playbook.yml --syntax-check
 
   # Lint the playbook.
   - ansible-lint tests/playbook.yml
 
   # Test the playbook.
-  - ansible-playbook tests/playbook.yml --inventory-file=tests/inventory
+  - ansible-playbook tests/playbook.yml
 
   # Test the playbook's idempotence.
   # (From https://github.com/geerlingguy/ansible-role-homebrew/blob/master/.travis.yml)
   - idempotence=$(mktemp /private/tmp/XXXXXXXXX)
-  - ansible-playbook tests/playbook.yml --inventory-file=tests/inventory | tee -a ${idempotence}
-  - "tail ${idempotence} | grep -q 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)"
+  - ansible-playbook tests/playbook.yml | tee -a ${idempotence}
+  - "tail -25 ${idempotence} | grep -q 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)"
 
   # Test host state
   - testinfra --connection=ansible --ansible-inventory=tests/inventory --hosts=localhost --verbose tests

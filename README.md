@@ -16,7 +16,7 @@ None (except running on Mac OS X).
 Role Variables
 --------------
 
-None.
+`force_install`: Install the Command Line Tools, even if they are already installed (Default: `yes`).
 
 Dependencies
 ------------

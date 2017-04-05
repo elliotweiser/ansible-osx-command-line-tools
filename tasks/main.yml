@@ -6,32 +6,51 @@
     msg: Target host is not running Mac OS X
   when: ansible_distribution != 'MacOSX'
 
-- name: Check that command line tools are installed
-  command: /usr/bin/xcode-select -print-path
-  register: xcode_select_res
+- name: Remove existing Command Line Tools installation
+  file:
+    path: '{{ clt_path }}'
+    state: absent
+    recurse: true
+  when: force_install
+  become: yes
+
+- name: Check that the Command Line Tools path is present
+  stat:
+    path: '{{ clt_path }}'
+  register: clt
+
+- name: Is the C++ compiler useable?
+  command: g++ --version
+  register: compiler
   ignore_errors: true
   changed_when: false
 
-- name: Check if the path to the git executable exists
-  stat:
-    path: /usr/bin/git
-  register: git_stat
+- name: Check the Command Line Tools package metadata
+  command: pkgutil --pkg-info=com.apple.pkg.CLTools_Executables
+  register: pkg_info
+  ignore_errors: true
+  changed_when: false
 
 - name: Prepare to install Command Line Tools
   file:
     path: /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
     state: touch
-  when: xcode_select_res.stdout|length == 0 or not git_stat.stat.exists
+  when: pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
 
 - name: Check for Command Line Tools in Software Update list
-  shell: softwareupdate -l | grep -B 1 -E 'Command Line Tools' | awk -F'*' '/^ +\*/ {print $2}' | sed 's/^ *//' | head -n1
+  shell: >
+    softwareupdate -l |
+    grep -B 1 -E 'Command Line Tools' |
+    awk -F'*' '/^ +\*/ {print $2}' |
+    sed 's/^ *//' |
+    head -n1
   register: su_list
-  when: xcode_select_res.stdout|length == 0 or not git_stat.stat.exists
+  when: pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
   changed_when: false
   failed_when: su_list.rc != 0 or su_list.stdout|length == 0
 
 - name: Install Command Line Tools
   command: softwareupdate -i '{{ su_list.stdout }}'
-  when: xcode_select_res.stdout|length == 0 or not git_stat.stat.exists
+  when: pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
   notify:
     - Cleanup
