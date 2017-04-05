@@ -1,2 +1,4 @@
 ---
 # defaults file for ansible-osx-command-line-tools
+
+force_install: no

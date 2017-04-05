@@ -15,10 +15,9 @@ def test_command_line_tools_dir(File):
     assert f.mode == 0o755
 
 
-def test_xcode_select_print_path(Command):
-    c = Command('xcode-select -print-path')
+def test_clt_package_metadata(Command):
+    c = Command('pkgutil --pkg-info=com.apple.pkg.CLTools_Executables')
     assert c.rc == 0
-    assert c.stdout == '/Library/Developer/CommandLineTools'
 
 
 def test_git_is_useable(Command):
