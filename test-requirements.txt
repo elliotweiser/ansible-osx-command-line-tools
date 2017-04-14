@@ -1,12 +1,12 @@
-ansible==2.2.1.0
+ansible==2.3.0.0
 ansible-lint==3.4.12
 anyconfig==0.7.0
 appdirs==1.4.3
 arrow==0.10.0
 asn1crypto==0.22.0
-binaryornot==0.4.0
+binaryornot==0.4.3
 cffi==1.10.0
-chardet==2.3.0
+chardet==3.0.2
 click==6.7
 colorama==0.3.7
 configparser==3.5.0
@@ -17,11 +17,11 @@ flake8==3.0.4
 future==0.16.0
 idna==2.5
 ipaddress==1.0.18
-Jinja2==2.8.1
+Jinja2==2.9.6
 jinja2-time==0.2.0
 MarkupSafe==1.0
 mccabe==0.5.3
-molecule==1.23.0
+molecule==1.23.1
 packaging==16.8
 paramiko==2.1.2
 pbr==1.10.0
@@ -42,5 +42,5 @@ PyYAML==3.12
 sh==1.11
 six==1.10.0
 tabulate==0.7.5
-testinfra==1.5.4
+testinfra==1.5.5
 whichcraft==0.4.0

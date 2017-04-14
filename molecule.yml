@@ -13,7 +13,7 @@ vagrant:
   platforms:
     - name: sierra
       box: jhcook/macos-sierra
-      box_version: 10.12.3
+      box_version: 10.12.4
     - name: elcapitan
       box: jhcook/osx-elcapitan-10.11
       box_version: 10.11.6
