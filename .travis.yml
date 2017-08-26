@@ -3,19 +3,20 @@ sudo: required
 language: generic
 os: osx
 env:
-  - OSX_IMAGE=xcode8.3 ANSIBLE_VERSION=2.3.0.0
-  - OSX_IMAGE=xcode8.3 ANSIBLE_VERSION=2.2.1.0
-  - OSX_IMAGE=xcode8.3 ANSIBLE_VERSION=2.1.4.0
+  - OSX_IMAGE=xcode8.3 ANSIBLE_VERSION=2.3.2.0
+  - OSX_IMAGE=xcode8.3 ANSIBLE_VERSION=2.2.3.0
+  - OSX_IMAGE=xcode8.3 ANSIBLE_VERSION=2.1.6.0
   - OSX_IMAGE=xcode8.3 ANSIBLE_VERSION=2.0.2.0
   - OSX_IMAGE=xcode8.3 ANSIBLE_VERSION=1.9.6
-  - OSX_IMAGE=xcode7.3 ANSIBLE_VERSION=2.3.0.0
-  - OSX_IMAGE=xcode6.4 ANSIBLE_VERSION=2.3.0.0
+  - OSX_IMAGE=xcode7.3 ANSIBLE_VERSION=2.3.2.0
+  - OSX_IMAGE=xcode6.4 ANSIBLE_VERSION=2.3.2.0
 
 osx_image: $OSX_IMAGE
 
 branches:
   only:
     - master
+    - /^\d+\.\d+(\.\d+)?(-\S*)?$/
 
 before_install:
   # Install pip
@@ -28,7 +29,9 @@ before_install:
   - virtualenv --version
   - source .venv/bin/activate
   - pip install -U pip
-  - pip install --no-deps -r tests/test-requirements-ansible-${ANSIBLE_VERSION}.txt
+  - pip install ansible==${ANSIBLE_VERSION}
+  - pip install ansible-lint
+  - pip install testinfra
 
   # Unwind the developer environment
   - curl -sLO https://raw.githubusercontent.com/Homebrew/install/master/uninstall
