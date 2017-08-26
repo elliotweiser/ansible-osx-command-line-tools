@@ -9,11 +9,13 @@ molecule:
     - .venv
 ansible:
   playbook: tests/playbook.yml
+  ansiblecfg_defaults:
+    callback_whitelist: profile_tasks,timer
 vagrant:
   platforms:
     - name: sierra
       box: jhcook/macos-sierra
-      box_version: 10.12.4
+      box_version: 10.12.6
     - name: elcapitan
       box: jhcook/osx-elcapitan-10.11
       box_version: 10.11.6
