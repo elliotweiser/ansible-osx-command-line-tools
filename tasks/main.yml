@@ -22,12 +22,14 @@
 - name: Is the C++ compiler useable?
   command: g++ --version
   register: compiler
+  check_mode: no
   ignore_errors: true
   changed_when: false
 
 - name: Check the Command Line Tools package metadata
   command: pkgutil --pkg-info=com.apple.pkg.CLTools_Executables
   register: pkg_info
+  check_mode: no
   ignore_errors: true
   changed_when: false
 
