@@ -3,10 +3,12 @@ sudo: required
 language: generic
 os: osx
 env:
-  - OSX_IMAGE=xcode8.3 ANSIBLE_VERSION=2.3.2.0
-  - OSX_IMAGE=xcode8.3 ANSIBLE_VERSION=2.2.3.0
-  - OSX_IMAGE=xcode7.3 ANSIBLE_VERSION=2.3.2.0
-  - OSX_IMAGE=xcode6.4 ANSIBLE_VERSION=2.3.2.0
+  - OSX_IMAGE=xcode9.1 ANSIBLE_VERSION=2.4.0.0
+  - OSX_IMAGE=xcode9.1 ANSIBLE_VERSION=2.3.2.0
+  - OSX_IMAGE=xcode9.1 ANSIBLE_VERSION=2.2.3.0
+  - OSX_IMAGE=xcode8.3 ANSIBLE_VERSION=2.4.0.0
+  - OSX_IMAGE=xcode7.3 ANSIBLE_VERSION=2.4.0.0
+  - OSX_IMAGE=xcode6.4 ANSIBLE_VERSION=2.4.0.0
 
 osx_image: $OSX_IMAGE
 
@@ -29,9 +31,11 @@ before_install:
   - pip install ansible==${ANSIBLE_VERSION}
   - pip install ansible-lint
   - pip install testinfra
+  - pip install yamllint
 
   # Unwind the developer environment
-  - curl -sLO https://raw.githubusercontent.com/Homebrew/install/master/uninstall
+  - URL=https://raw.githubusercontent.com/Homebrew/install/master/uninstall
+  - curl -sLO "${URL}"
   - chmod +x uninstall
   - ./uninstall --force
   - rm -rf /usr/local/Homebrew
@@ -44,9 +48,13 @@ install:
   - python --version
   - ansible --version
   - ansible-lint --version
-  - testinfra --version
+  - py.test --version
+  - yamllint --version
 
 script:
+  # Lint all YAML files.
+  - yamllint -c tests/yamllint.yml .
+
   # Check the role/playbook's syntax.
   - ansible-playbook tests/playbook.yml --syntax-check
 
@@ -57,13 +65,16 @@ script:
   - ansible-playbook tests/playbook.yml
 
   # Test the playbook's idempotence.
-  # (From https://github.com/geerlingguy/ansible-role-homebrew/blob/master/.travis.yml)
   - idempotence=$(mktemp /private/tmp/XXXXXXXXX)
   - ansible-playbook tests/playbook.yml | tee -a ${idempotence}
-  - "tail -25 ${idempotence} | grep -q 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)"
+  - >-
+      tail -25 ${idempotence} |
+      grep -q 'changed=0.*failed=0' &&
+      (echo 'Idempotence test: pass' && exit 0) ||
+      (echo 'Idempotence test: fail' && exit 1)
 
   # Test host state
-  - testinfra --connection=ansible --ansible-inventory=tests/inventory --hosts=localhost --verbose tests
+  - py.test --connection=local --hosts=localhost --verbose tests
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
