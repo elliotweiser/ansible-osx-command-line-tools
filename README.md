@@ -36,7 +36,7 @@ A simple playbook example:
 Testing Instructions
 --------------------
 
-1. Install [Virtualbox][vbox]
+1. Install [VirtualBox][vbox] (including the VirtualBox Extension Pack)
 1. Install [Vagrant][vagrant]
 1. Install `virtualenv`: `pip install -U virtualenv`
 
@@ -44,6 +44,7 @@ If you already have [Homebrew][homebrew] installed, you can use:
 
 ```bash
 brew cask install virtualbox
+brew cask install virtualbox-extension-pack
 brew cask install vagrant
 ```
 
@@ -55,17 +56,18 @@ source .venv/bin/activate
 pip install --no-deps -r tests/test-requirements.txt
 ```
 
-Run the full test suite against the default platform. The default platform is
-`sierra`:
+Run the full lifecycle test on a given `<PLATFORM>`. Allowed values for
+`<PLATFORM>` are `sierra`, `elcapitan`, and `yosemite`.
 
 ```bash
+source molecule/<PLATFORM>.sh
 molecule test
 ```
 
-Run the full test suite on a different platform:
+Unset the `MOLECULE_` environment variables:
 
 ```bash
-molecule test --platform yosemite
+source molecule/unset.sh
 ```
 
 License
