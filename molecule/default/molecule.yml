@@ -7,8 +7,6 @@ driver:
     name: virtualbox
 lint:
   name: yamllint
-  options:
-    config-file: tests/yamllint.yml
 platforms:
   - name: ${MOLECULE_NAME}
     box: ${MOLECULE_BOX}
