@@ -53,7 +53,7 @@ install:
 
 script:
   # Lint all YAML files.
-  - yamllint -c tests/yamllint.yml .
+  - yamllint .
 
   # Check the role/playbook's syntax.
   - ansible-playbook tests/playbook.yml --syntax-check
