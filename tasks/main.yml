@@ -10,7 +10,6 @@
   file:
     path: '{{ clt_path }}'
     state: absent
-    recurse: true
   when: force_install
   become: yes
 
