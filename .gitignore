@@ -7,3 +7,4 @@ playbook.retry
 tests/__pycache__/
 .ansible_vault_password
 *.box
+pytestdebug.log
