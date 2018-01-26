@@ -1,0 +1,10 @@
+---
+- name: Prepare
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  no_log: "{{ not lookup('env', 'MOLECULE_DEBUG') | bool }}"
+  tasks:
+    - name: Nothing to prepare
+      debug:
+        msg: Nothing to do! Moving on...
