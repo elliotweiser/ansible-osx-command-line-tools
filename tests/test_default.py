@@ -2,8 +2,8 @@ import re
 
 
 def test_tmp_file_is_gone(host):
-    tmp_file = 'tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress'
-    f = host.file(tmp_file)
+    tmpfile = '/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress'
+    f = host.file(tmpfile)
     assert not f.exists
 
 
