@@ -3,5 +3,5 @@
 
 - name: Cleanup
   file:
-    path: /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    path: '{{ osx_clt_tmp_file }}'
     state: absent

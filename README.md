@@ -17,7 +17,12 @@ None (except running on Mac OS X).
 Role Variables
 --------------
 
-`force_install`: Install the Command Line Tools, even if they are already installed (Default: `no`).
+Going forward, all role variables will be prefixed with `osx_clt_` (for OSX **C**ommand
+**L**ine **T**ools) to avoid ambiguity and potential namespace collision.
+
+| Variable Name           | Description                                               | Default |
+| :---                    | :---                                                      |  :---:  |
+| `osx_clt_force_install` | Install the Command Line Tools, even if already installed |  `no`   |
 
 Dependencies
 ------------

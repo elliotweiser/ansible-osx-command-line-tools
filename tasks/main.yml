@@ -2,65 +2,68 @@
 # tasks file for ansible-osx-command-line-tools
 
 - name: Am I running on Mac OS X?
-  fail:
+  assert:
+    that: ansible_distribution == 'MacOSX'
     msg: Target host is not running Mac OS X
-  when: ansible_distribution != 'MacOSX'
 
 - name: Remove existing Command Line Tools installation
   file:
-    path: '{{ clt_path }}'
+    path: '{{ osx_clt_path }}'
     state: absent
-  when: force_install
+  when: osx_clt_force_install
   become: yes
 
 - name: Check that the Command Line Tools path is present
   stat:
-    path: '{{ clt_path }}'
-  register: clt
+    path: '{{ osx_clt_path }}'
+  register: osx_clt_stat
 
 - name: Is the C++ compiler useable?
   command: g++ --version
-  register: compiler
+  register: osx_clt_compiler
   check_mode: no
   ignore_errors: true
   changed_when: false
 
 - name: Check the Command Line Tools package metadata
   command: pkgutil --pkg-info=com.apple.pkg.CLTools_Executables
-  register: pkg_info
+  register: osx_clt_pkg_info
   check_mode: no
   ignore_errors: true
   changed_when: false
 
-- name: Prepare to install Command Line Tools
-  file:
-    path: /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-    state: touch
-  when: pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
+- block:
+    - name: Prepare to install Command Line Tools
+      file:
+        path: '{{ osx_clt_tmp_file }}'
+        state: touch
 
-- name: Check for Command Line Tools in Software Update list
-  shell: >
-    set -o pipefail;
-    softwareupdate -l |
-    grep -B 1 -E 'Command Line Tools' |
-    awk -F'*' '/^ +\*/ {print $2}' |
-    sed 's/^ *//' |
-    grep -iE '[0-9|.]' |
-    sort |
-    tail -n1
-  args:
-    executable: /bin/bash
-  register: su_list
-  when: pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
-  changed_when: false
-  failed_when: su_list.rc != 0 or su_list.stdout|length == 0
+    - name: Check for Command Line Tools in Software Update list
+      shell: >
+        set -o pipefail;
+        /usr/sbin/softwareupdate -l |
+        grep -B 1 -E 'Command Line Tools' |
+        awk -F'*' '/^ +\*/ {print $2}' |
+        sed 's/^ *//' |
+        grep -iE '[0-9|.]' |
+        sort |
+        tail -n1
+      args:
+        executable: /bin/bash
+      register: osx_clt_su_list
+      changed_when: false
+      failed_when: osx_clt_su_list.rc != 0 or osx_clt_su_list.stdout|length == 0
 
-- name: Install Command Line Tools
-  command: softwareupdate -i '{{ su_list.stdout }}'
-  when: pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
-  notify:
-    - Cleanup
-  register: su_result
-  failed_when: >-
-    su_result.rc != 0 or
-    'Error installing updates.' in su_result.stdout
+    - name: Install Command Line Tools
+      command: /usr/sbin/softwareupdate -i '{{ osx_clt_su_list.stdout }}'
+      notify:
+        - Cleanup
+      register: osx_clt_su_result
+      failed_when: >-
+        osx_clt_su_result.rc != 0 or
+        'Error installing updates.' in osx_clt_su_result.stdout
+  when: >-
+    osx_clt_pkg_info.rc != 0 or
+    osx_clt_compiler.rc != 0 or
+    not osx_clt_stat.stat.exists or
+    (osx_clt_force_install | bool)
