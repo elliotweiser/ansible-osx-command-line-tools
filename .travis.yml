@@ -32,7 +32,12 @@ branches:
 
 before_install:
   # Install pip
-  - sudo easy_install pip
+  - wget --no-check-certificate https://bootstrap.pypa.io/get-pip.py
+  - >-
+    export
+    GET_PIP_SHA=b7296a5fb2b505c1f97c14200b610c375b22192bdfbd10eea0a3786e0e04a04f
+  - echo "$GET_PIP_SHA  get-pip.py" | shasum -a 256 -c
+  - sudo -H python get-pip.py
 
   # Setup virtualenv
   - sudo -H pip install -U virtualenv
