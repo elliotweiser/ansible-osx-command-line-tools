@@ -4,29 +4,29 @@ language: generic
 matrix:
   include:
     - os: osx
-      osx_image: xcode9.3beta
-      env: ANSIBLE_VERSION=2.5.0
+      osx_image: xcode9.3
+      env: ANSIBLE_VERSION=2.5.3
     - os: osx
-      osx_image: xcode9.2
-      env: ANSIBLE_VERSION=2.5.0
-    - os: osx
-      osx_image: xcode9.2
+      osx_image: xcode9.3
       env: ANSIBLE_VERSION=2.4.4.0
     - os: osx
-      osx_image: xcode9.2
+      osx_image: xcode9.3
       env: ANSIBLE_VERSION=2.3.3.0
     - os: osx
-      osx_image: xcode9.2
+      osx_image: xcode9.3
       env: ANSIBLE_VERSION=2.2.3.0
     - os: osx
+      osx_image: xcode9.2
+      env: ANSIBLE_VERSION=2.5.3
+    - os: osx
       osx_image: xcode8.3
-      env: ANSIBLE_VERSION=2.5.0
+      env: ANSIBLE_VERSION=2.5.3
     - os: osx
       osx_image: xcode7.3
-      env: ANSIBLE_VERSION=2.5.0
+      env: ANSIBLE_VERSION=2.5.3
     - os: osx
       osx_image: xcode6.4
-      env: ANSIBLE_VERSION=2.5.0
+      env: ANSIBLE_VERSION=2.5.3
 
 branches:
   only:
@@ -34,19 +34,20 @@ branches:
     - /^\d+\.\d+(\.\d+)?(-\S*)?$/
 
 before_install:
+  # Check Python version
+  - which python
+  - ls -l $(which python)
+  - /usr/bin/python --version
+
   # Install pip
-  - wget --no-check-certificate https://bootstrap.pypa.io/get-pip.py
-  - >-
-    export
-    GET_PIP_SHA=b7296a5fb2b505c1f97c14200b610c375b22192bdfbd10eea0a3786e0e04a04f
-  - echo "$GET_PIP_SHA  get-pip.py" | shasum -a 256 -c
-  - sudo -H python get-pip.py
+  - curl https://bootstrap.pypa.io/get-pip.py | sudo -H /usr/bin/python
+  - pip --version
 
   # Setup virtualenv
+  - brew cleanup
   - sudo -H pip install -U virtualenv
-  - ls -l /usr/bin/python
-  - virtualenv --python=/usr/bin/python .venv
   - virtualenv --version
+  - virtualenv .venv
   - source .venv/bin/activate
   - pip install -U pip
   - pip install ansible==${ANSIBLE_VERSION}
@@ -69,7 +70,6 @@ before_install:
 
 install:
   # Check versions
-  - python --version
   - ansible --version
   - ansible-lint --version
   - py.test --version
