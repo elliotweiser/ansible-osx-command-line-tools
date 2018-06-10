@@ -13,6 +13,9 @@ platforms:
     box_version: ${MOLECULE_BOX_VERSION}
     memory: 2048
     cpus: 4
+    config_options:
+      synced_folder: false
+      boot_timeout: 300
 provisioner:
   name: ansible
   playbooks:
