@@ -44,7 +44,7 @@
     grep -B 1 -E 'Command Line Tools' |
     awk -F'*' '/^ +\*/ {print $2}' |
     sed 's/^ *//' |
-    head -n1
+    tail -n1
   register: su_list
   when: pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
   changed_when: false
