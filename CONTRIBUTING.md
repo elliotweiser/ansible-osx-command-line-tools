@@ -43,7 +43,7 @@ pip install --no-deps -r tests/test-requirements.txt
 ```
 
 Run the full lifecycle test on a given `<PLATFORM>`. Allowed values for
-`<PLATFORM>` are `sierra`, `elcapitan`, and `yosemite`.
+`<PLATFORM>` are `highsierra`, `sierra`, `elcapitan`, and `yosemite`.
 
 ```bash
 source molecule/<PLATFORM>.sh
