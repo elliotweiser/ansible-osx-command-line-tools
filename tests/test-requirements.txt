@@ -1,5 +1,5 @@
 ansible==2.5.5
-ansible-lint==3.4.21
+ansible-lint==3.4.22
 anyconfig==0.9.4
 appdirs==1.4.3
 arrow==0.12.1
