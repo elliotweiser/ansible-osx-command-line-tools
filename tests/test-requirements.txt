@@ -43,7 +43,7 @@ pexpect==4.6.0
 pluggy==0.6.0
 poyo==0.4.1
 psutil==5.4.6
-ptyprocess==0.5.2
+ptyprocess==0.6.0
 py==1.5.3
 pyasn1==0.4.3
 pycodestyle==2.4.0
