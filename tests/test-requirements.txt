@@ -44,7 +44,7 @@ pluggy==0.6.0
 poyo==0.4.1
 psutil==5.4.6
 ptyprocess==0.6.0
-py==1.5.3
+py==1.5.4
 pyasn1==0.4.3
 pycodestyle==2.4.0
 pycparser==2.18
