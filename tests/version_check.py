@@ -22,7 +22,7 @@ def main(argv):
     url = 'https://galaxy.ansible.com/api/v1/platforms/?name=MacOSX'
     r = requests.get(url)
     json_obj = json.loads(r.text)
-    allowed_versions = set(map(lambda x: str(x["release"]), json_obj))
+    allowed_versions = set(map(lambda x: str(x["release"]), json_obj['results']))
 
     print "ALLOWED:", list(allowed_versions)
     print
