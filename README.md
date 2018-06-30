@@ -49,10 +49,10 @@ Author Information
 
 [Elliot Weiser](https://github.com/elliotweiser)
 
-[badge-downloads]: https://img.shields.io/ansible/role/d/14481.svg?style=flat-square
+[badge-downloads]: https://img.shields.io/ansible/role/d/26582.svg?style=flat-square
 [badge-license]: https://img.shields.io/github/license/elliotweiser/ansible-osx-command-line-tools.svg?style=flat-square
 [badge-requires]: https://img.shields.io/requires/github/elliotweiser/ansible-osx-command-line-tools.svg?style=flat-square
-[badge-role]: https://img.shields.io/ansible/role/14481.svg?style=flat-square
+[badge-role]: https://img.shields.io/ansible/role/26582.svg?style=flat-square
 [badge-travis]: https://img.shields.io/travis/elliotweiser/ansible-osx-command-line-tools/master.svg?style=flat-square
 [link-galaxy]: https://galaxy.ansible.com/elliotweiser/osx-command-line-tools/
 [link-license]: https://raw.githubusercontent.com/elliotweiser/ansible-osx-command-line-tools/master/LICENSE
