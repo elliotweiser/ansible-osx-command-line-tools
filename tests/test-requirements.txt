@@ -1,4 +1,4 @@
-ansible==2.6.0
+ansible==2.6.1
 ansible-lint==3.4.23
 anyconfig==0.9.7
 appdirs==1.4.3
