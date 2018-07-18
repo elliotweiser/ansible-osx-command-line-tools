@@ -18,7 +18,7 @@ click-completion==0.3.1
 colorama==0.3.9
 configparser==3.5.0
 cookiecutter==1.6.0
-cryptography==2.2.2
+cryptography==2.3
 enum34==1.1.6
 fasteners==0.14.1
 flake8==3.5.0
