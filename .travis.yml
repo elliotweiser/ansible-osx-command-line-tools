@@ -4,29 +4,32 @@ language: generic
 matrix:
   include:
     - os: osx
-      osx_image: xcode9.3
-      env: ANSIBLE_VERSION=2.5.4
+      osx_image: xcode9.4
+      env: ANSIBLE_VERSION=2.6.1
     - os: osx
-      osx_image: xcode9.3
-      env: ANSIBLE_VERSION=2.4.4.0
+      osx_image: xcode9.4
+      env: ANSIBLE_VERSION=2.5.6
     - os: osx
-      osx_image: xcode9.3
+      osx_image: xcode9.4
+      env: ANSIBLE_VERSION=2.4.6.0
+    - os: osx
+      osx_image: xcode9.4
       env: ANSIBLE_VERSION=2.3.3.0
     - os: osx
-      osx_image: xcode9.3
+      osx_image: xcode9.4
       env: ANSIBLE_VERSION=2.2.3.0
     - os: osx
       osx_image: xcode9.2
-      env: ANSIBLE_VERSION=2.5.4
+      env: ANSIBLE_VERSION=2.6.1
     - os: osx
       osx_image: xcode8.3
-      env: ANSIBLE_VERSION=2.5.4
+      env: ANSIBLE_VERSION=2.6.1
     - os: osx
       osx_image: xcode7.3
-      env: ANSIBLE_VERSION=2.5.4
+      env: ANSIBLE_VERSION=2.6.1
     - os: osx
       osx_image: xcode6.4
-      env: ANSIBLE_VERSION=2.5.4
+      env: ANSIBLE_VERSION=2.6.1
 
 branches:
   only:
