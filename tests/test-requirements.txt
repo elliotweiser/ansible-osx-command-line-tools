@@ -13,7 +13,7 @@ certifi==2018.4.16
 cffi==1.11.5
 chardet==3.0.4
 click==6.7
-click-completion==0.3.1
+click-completion==0.4.0
 colorama==0.3.9
 configparser==3.5.0
 cookiecutter==1.6.0
