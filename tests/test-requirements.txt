@@ -39,7 +39,7 @@ pbr==4.2.0
 pexpect==4.6.0
 pluggy==0.7.1
 poyo==0.4.1
-psutil==5.4.6
+psutil==5.4.7
 ptyprocess==0.6.0
 py==1.5.4
 pyasn1==0.4.4
