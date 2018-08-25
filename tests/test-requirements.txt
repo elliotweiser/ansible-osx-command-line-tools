@@ -3,7 +3,7 @@ ansible-lint==3.4.23
 anyconfig==0.9.7
 arrow==0.12.1
 asn1crypto==0.24.0
-atomicwrites==1.1.5
+atomicwrites==1.2.0
 attrs==18.1.0
 backports.functools-lru-cache==1.5
 bcrypt==3.1.4
