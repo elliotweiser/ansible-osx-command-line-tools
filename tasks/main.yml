@@ -55,3 +55,5 @@
   when: pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
   notify:
     - Cleanup
+  register: su_result
+  failed_when: '"Error installing updates." in su_result.stdout'
