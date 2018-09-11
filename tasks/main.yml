@@ -56,4 +56,4 @@
   notify:
     - Cleanup
   register: su_result
-  failed_when: '"Error installing updates." in su_result.stdout'
+  failed_when: 'su_result.rc != 0 or "Error installing updates." in su_result.stdout'
