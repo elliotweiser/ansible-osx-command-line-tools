@@ -44,7 +44,7 @@ ptyprocess==0.6.0
 py==1.6.0
 pyasn1==0.4.4
 pycodestyle==2.4.0
-pycparser==2.18
+pycparser==2.19
 pyflakes==2.0.0
 PyNaCl==1.2.1
 pytest==3.8.0
