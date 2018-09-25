@@ -56,7 +56,7 @@ requests==2.19.1
 sh==1.12.14
 six==1.11.0
 tabulate==0.8.2
-testinfra==1.15.0
+testinfra==1.16.0
 tree-format==0.1.2
 urllib3==1.23
 whichcraft==0.4.1
