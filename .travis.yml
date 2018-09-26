@@ -4,32 +4,23 @@ language: generic
 matrix:
   include:
     - os: osx
-      osx_image: xcode9.4
-      env: ANSIBLE_VERSION=2.6.1
+      osx_image: xcode10
+      env: ANSIBLE_VERSION='<2.7.0'
     - os: osx
-      osx_image: xcode9.4
-      env: ANSIBLE_VERSION=2.5.6
+      osx_image: xcode10
+      env: ANSIBLE_VERSION='<2.6.0'
     - os: osx
-      osx_image: xcode9.4
-      env: ANSIBLE_VERSION=2.4.6.0
-    - os: osx
-      osx_image: xcode9.4
-      env: ANSIBLE_VERSION=2.3.3.0
-    - os: osx
-      osx_image: xcode9.4
-      env: ANSIBLE_VERSION=2.2.3.0
+      osx_image: xcode10
+      env: ANSIBLE_VERSION='<2.5.0'
     - os: osx
       osx_image: xcode9.2
-      env: ANSIBLE_VERSION=2.6.1
+      env: ANSIBLE_VERSION='<2.7.0'
     - os: osx
-      osx_image: xcode8.3
-      env: ANSIBLE_VERSION=2.6.1
-    - os: osx
-      osx_image: xcode7.3
-      env: ANSIBLE_VERSION=2.6.1
+      osx_image: xcode8
+      env: ANSIBLE_VERSION='<2.7.0'
     - os: osx
       osx_image: xcode6.4
-      env: ANSIBLE_VERSION=2.6.1
+      env: ANSIBLE_VERSION='<2.7.0'
 
 branches:
   only:
@@ -52,11 +43,11 @@ before_install:
   - virtualenv --version
   - virtualenv .venv
   - source .venv/bin/activate
-  - pip install -U pip
-  - pip install ansible==${ANSIBLE_VERSION}
-  - pip install ansible-lint
-  - pip install testinfra
-  - pip install yamllint
+  - pip install -U 'pip'
+  - pip install "ansible${ANSIBLE_VERSION}"
+  - pip install 'ansible-lint'
+  - pip install 'testinfra'
+  - pip install 'yamllint'
 
   # For version_check.py
   - pip install requests
