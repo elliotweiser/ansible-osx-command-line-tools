@@ -39,7 +39,7 @@ pathspec==0.5.9
 pbr==4.2.0
 pexpect==4.6.0
 pluggy==0.7.1
-poyo==0.4.1
+poyo==0.4.2
 psutil==5.4.7
 ptyprocess==0.6.0
 py==1.6.0
