@@ -38,7 +38,7 @@ pathlib2==2.3.2
 pathspec==0.5.9
 pbr==4.3.0
 pexpect==4.6.0
-pluggy==0.7.1
+pluggy==0.8.0
 poyo==0.4.2
 psutil==5.4.7
 ptyprocess==0.6.0
