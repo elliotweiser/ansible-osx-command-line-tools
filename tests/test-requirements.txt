@@ -30,7 +30,7 @@ Jinja2==2.10
 jinja2-time==0.2.0
 MarkupSafe==1.0
 mccabe==0.6.1
-molecule==2.18.1
+molecule==2.19.0
 monotonic==1.5
 more-itertools==4.3.0
 paramiko==2.4.2
