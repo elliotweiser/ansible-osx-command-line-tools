@@ -10,7 +10,7 @@ lint:
 platforms:
   - name: ${MOLECULE_NAME}
     box: ${MOLECULE_BOX}
-    box_version: ${MOLECULE_BOX_VERSION}
+    box_version: "${MOLECULE_BOX_VERSION}"
     memory: 2048
     cpus: 4
     config_options:
@@ -22,6 +22,7 @@ provisioner:
     create: create.yml
     converge: ../../tests/playbook.yml
     destroy: destroy.yml
+    prepare: prepare.yml
   config_options:
     defaults:
       callback_whitelist: profile_tasks,timer
