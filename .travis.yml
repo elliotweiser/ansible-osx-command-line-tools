@@ -3,24 +3,30 @@ sudo: required
 language: generic
 matrix:
   include:
+    # High Sierra
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode10.1
+      env: ANSIBLE_VERSION='<2.8.0'
+    # High Sierra
+    - os: osx
+      osx_image: xcode10.1
       env: ANSIBLE_VERSION='<2.7.0'
+    # High Sierra
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode10.1
       env: ANSIBLE_VERSION='<2.6.0'
+    # High Sierra
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode10.1
       env: ANSIBLE_VERSION='<2.5.0'
+    # Sierra
     - os: osx
       osx_image: xcode9.2
-      env: ANSIBLE_VERSION='<2.7.0'
+      env: ANSIBLE_VERSION='<2.8.0'
+    # El Capitan
     - os: osx
       osx_image: xcode8
-      env: ANSIBLE_VERSION='<2.7.0'
-    - os: osx
-      osx_image: xcode6.4
-      env: ANSIBLE_VERSION='<2.7.0'
+      env: ANSIBLE_VERSION='<2.8.0'
 
 branches:
   only:
@@ -28,30 +34,6 @@ branches:
     - /^\d+\.\d+(\.\d+)?(-\S*)?$/
 
 before_install:
-  # Check Python version
-  - which python
-  - ls -l $(which python)
-  - /usr/bin/python --version
-
-  # Install pip
-  - curl https://bootstrap.pypa.io/get-pip.py | sudo -H /usr/bin/python
-  - pip --version
-
-  # Setup virtualenv
-  - brew cleanup
-  - sudo -H pip install -U virtualenv
-  - virtualenv --version
-  - virtualenv .venv
-  - source .venv/bin/activate
-  - pip install -U 'pip'
-  - pip install "ansible${ANSIBLE_VERSION}"
-  - pip install 'ansible-lint'
-  - pip install 'testinfra'
-  - pip install 'yamllint'
-
-  # For version_check.py
-  - pip install requests
-
   # Unwind the developer environment
   - URL=https://raw.githubusercontent.com/Homebrew/install/master/uninstall
   - curl -sLO "${URL}"
@@ -62,7 +44,30 @@ before_install:
   - sudo rm -rf /usr/local/bin/brew
   - sudo rm -rf /Library/Developer/CommandLineTools
 
+  # Install pip
+  - curl https://bootstrap.pypa.io/get-pip.py | sudo -H /usr/bin/python
+  - which pip
+  - pip --version
+
+  # Setup virtualenv
+  - sudo -H pip install -U virtualenv
+  - virtualenv --version
+  - virtualenv .venv
+  - source .venv/bin/activate
+
 install:
+  # Upgrade setuptools and install setuptools_scm (for testinfra)
+  - pip install -U setuptools setuptools_scm
+
+  # Dependencies
+  - pip install "ansible${ANSIBLE_VERSION}"
+  - pip install ansible-lint
+  - pip install testinfra
+  - pip install yamllint
+
+  # Requests, required for version_check.py
+  - pip install requests
+
   # Check versions
   - ansible --version
   - ansible-lint --version

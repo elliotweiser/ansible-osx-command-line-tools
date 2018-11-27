@@ -1,10 +1,9 @@
 ---
 - name: Prepare
-  hosts: localhost
-  connection: local
-  gather_facts: False
-  no_log: "{{ not lookup('env', 'MOLECULE_DEBUG') | bool }}"
+  hosts: all
   tasks:
-    - name: Nothing to prepare
-      debug:
-        msg: Nothing to do! Moving on...
+    - name: Remove existing Command Line Tools installation
+      file:
+        path: /Library/Developer/CommandLineTools
+        state: absent
+      become: yes
