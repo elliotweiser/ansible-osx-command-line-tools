@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+ansible = "<2.8.0"
+molecule = {extras = ["vagrant"],version = "<3.0.0"}
+testinfra = "<2.0.0"
+ansible-lint = "<4.0.0"
+yamllint = "<2.0.0"
+requests = "<3.0.0"
+python-vagrant = "*"
+
+[requires]
+python_version = "2.7"
