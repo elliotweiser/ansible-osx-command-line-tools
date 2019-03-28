@@ -32,7 +32,7 @@ MarkupSafe==1.1.1
 mccabe==0.6.1
 molecule==2.20.0
 monotonic==1.5
-more-itertools==6.0.0
+more-itertools==7.0.0
 paramiko==2.4.2
 pathlib2==2.3.3
 pathspec==0.5.9
