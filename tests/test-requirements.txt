@@ -53,7 +53,7 @@ python-dateutil==2.8.0
 python-gilt==1.2.1
 python-vagrant==0.5.15
 PyYAML==5.1
-requests==2.21.0
+requests==2.22.0
 ruamel.ordereddict==0.4.13
 ruamel.yaml==0.15.95
 scandir==1.10.0
