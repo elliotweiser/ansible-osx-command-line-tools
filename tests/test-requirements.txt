@@ -19,7 +19,7 @@ configparser==3.8.0
 cookiecutter==1.6.0
 cryptography==2.6.1
 enum34==1.1.6
-fasteners==0.14.1
+fasteners==0.15
 flake8==3.7.7
 funcsigs==1.0.2
 future==0.17.1
