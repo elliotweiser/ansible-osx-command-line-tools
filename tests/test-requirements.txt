@@ -1,4 +1,4 @@
-ansible==2.8.0
+ansible==2.8.1
 ansible-lint==4.1.0
 anyconfig==0.9.9
 arrow==0.14.2
@@ -52,7 +52,7 @@ pytest==4.6.2
 python-dateutil==2.8.0
 python-gilt==1.2.1
 python-vagrant==0.5.15
-PyYAML==5.1
+PyYAML==5.1.1
 requests==2.22.0
 ruamel.ordereddict==0.4.13
 ruamel.yaml==0.15.97
