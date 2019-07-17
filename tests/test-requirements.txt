@@ -55,7 +55,7 @@ python-vagrant==0.5.15
 PyYAML==5.1.1
 requests==2.22.0
 ruamel.ordereddict==0.4.13
-ruamel.yaml==0.15.99
+ruamel.yaml==0.15.100
 scandir==1.10.0
 sh==1.12.14
 six==1.12.0
