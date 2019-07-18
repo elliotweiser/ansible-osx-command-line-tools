@@ -36,7 +36,7 @@ more-itertools==7.1.0
 paramiko==2.6.0
 pathlib2==2.3.4
 pathspec==0.5.9
-pbr==5.4.0
+pbr==5.4.1
 pexpect==4.7.0
 pluggy==0.12.0
 poyo==0.4.2
