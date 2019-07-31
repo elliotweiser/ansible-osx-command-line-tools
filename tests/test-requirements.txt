@@ -52,7 +52,7 @@ pytest==5.0.1
 python-dateutil==2.8.0
 python-gilt==1.2.1
 python-vagrant==0.5.15
-PyYAML==5.1.1
+PyYAML==5.1.2
 requests==2.22.0
 ruamel.ordereddict==0.4.14
 ruamel.yaml==0.16.0
