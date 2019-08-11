@@ -15,7 +15,7 @@ chardet==3.0.4
 click==7.0
 click-completion==0.5.1
 colorama==0.4.1
-configparser==3.8.0
+configparser==3.8.1
 cookiecutter==1.6.0
 cryptography==2.7
 enum34==1.1.6
