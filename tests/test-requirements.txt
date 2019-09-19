@@ -62,6 +62,6 @@ six==1.12.0
 tabulate==0.8.3
 testinfra==3.2.0
 tree-format==0.1.2
-urllib3==1.25.3
+urllib3==1.25.4
 whichcraft==0.6.0
 yamllint==1.17.0
