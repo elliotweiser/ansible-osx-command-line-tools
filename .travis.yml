@@ -3,30 +3,26 @@ sudo: required
 language: generic
 matrix:
   include:
-    # High Sierra
+    # Mojave (Latest)
     - os: osx
-      osx_image: xcode10.1
+      osx_image: xcode10.3
+      env: ANSIBLE_VERSION='<2.9.0'
+    # Mojave (Ansible 2.7)
+    - os: osx
+      osx_image: xcode10.3
       env: ANSIBLE_VERSION='<2.8.0'
     # High Sierra
     - os: osx
       osx_image: xcode10.1
-      env: ANSIBLE_VERSION='<2.7.0'
-    # High Sierra
-    - os: osx
-      osx_image: xcode10.1
-      env: ANSIBLE_VERSION='<2.6.0'
-    # High Sierra
-    - os: osx
-      osx_image: xcode10.1
-      env: ANSIBLE_VERSION='<2.5.0'
+      env: ANSIBLE_VERSION='<2.9.0'
     # Sierra
     - os: osx
       osx_image: xcode9.2
-      env: ANSIBLE_VERSION='<2.8.0'
+      env: ANSIBLE_VERSION='<2.9.0'
     # El Capitan
     - os: osx
       osx_image: xcode8
-      env: ANSIBLE_VERSION='<2.8.0'
+      env: ANSIBLE_VERSION='<2.9.0'
 
 branches:
   only:
@@ -60,13 +56,12 @@ install:
   - pip install -U setuptools setuptools_scm
 
   # Dependencies
-  - pip install "ansible${ANSIBLE_VERSION}"
-  - pip install ansible-lint
-  - pip install testinfra
-  - pip install yamllint
-
-  # Requests, required for version_check.py
-  - pip install requests
+  - >-
+    pip install "ansible${ANSIBLE_VERSION}"
+    ansible-lint
+    testinfra
+    yamllint
+    requests
 
   # Check versions
   - ansible --version
@@ -86,6 +81,9 @@ script:
 
   # Lint the playbook.
   - ansible-lint tests/playbook.yml
+
+  # Simple syntax check
+  - ansible-playbook --syntax-check tests/playbook.yml
 
   # Test the playbook.
   - ansible-playbook tests/playbook.yml
