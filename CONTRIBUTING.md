@@ -39,7 +39,7 @@ Now you can setup your virtual environment for testing:
 ```bash
 virtualenv --python=$(which python2.7) .venv
 source .venv/bin/activate
-pip install --no-deps -r tests/test-requirements.txt
+pip install -r tests/test-requirements.txt
 ```
 
 Run the full lifecycle test on a given `<PLATFORM>`. Allowed values for
