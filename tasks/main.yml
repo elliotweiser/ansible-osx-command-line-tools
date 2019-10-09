@@ -70,7 +70,7 @@
   args:
     executable: /bin/bash
   register: su_list
-  when: 
+  when:
     - ansible_distribution_version is version('10.15', '>=')
     - pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
   changed_when: false
