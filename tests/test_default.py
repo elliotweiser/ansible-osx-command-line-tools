@@ -24,5 +24,5 @@ def test_clt_package_metadata(host):
 def test_git_is_useable(host):
     c = host.command('/usr/bin/git --version')
     assert c.rc == 0
-    assert re.match('^git version \d+(.\d+)* \(Apple Git-\d+(\.\d+)*\)$',
+    assert re.match(r'^git version \d+(.\d+)* \(Apple Git-\d+(\.\d+)*\)$',
                     c.stdout)
