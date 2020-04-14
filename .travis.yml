@@ -34,10 +34,11 @@ before_install:
   - URL=https://raw.githubusercontent.com/Homebrew/install/master/uninstall
   - curl -sLO "${URL}"
   - chmod +x uninstall
-  - ./uninstall --force
-  - rm -rf /usr/local/Homebrew
+  - yes | ./uninstall --force
+  - sudo rm -rf /usr/local/Homebrew
   - sudo rm -rf /usr/local/Caskroom
   - sudo rm -rf /usr/local/bin/brew
+  - sudo rm -rf /usr/local/Cellar
   - sudo rm -rf /Library/Developer/CommandLineTools
 
   # Install pip
