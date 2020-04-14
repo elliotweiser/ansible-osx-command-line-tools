@@ -35,7 +35,7 @@ before_install:
   - curl -sLO "${URL}"
   - chmod +x uninstall
   - yes | ./uninstall --force
-  - rm -rf /usr/local/Homebrew
+  - sudo rm -rf /usr/local/Homebrew
   - sudo rm -rf /usr/local/Caskroom
   - sudo rm -rf /usr/local/bin/brew
   - sudo rm -rf /Library/Developer/CommandLineTools
