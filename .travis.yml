@@ -34,7 +34,7 @@ before_install:
   - URL=https://raw.githubusercontent.com/Homebrew/install/master/uninstall
   - curl -sLO "${URL}"
   - chmod +x uninstall
-  - ./uninstall --force
+  - yes | ./uninstall --force
   - rm -rf /usr/local/Homebrew
   - sudo rm -rf /usr/local/Caskroom
   - sudo rm -rf /usr/local/bin/brew
