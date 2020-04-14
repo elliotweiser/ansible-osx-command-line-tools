@@ -38,6 +38,7 @@ before_install:
   - sudo rm -rf /usr/local/Homebrew
   - sudo rm -rf /usr/local/Caskroom
   - sudo rm -rf /usr/local/bin/brew
+  - sudo rm -rf /usr/local/Cellar
   - sudo rm -rf /Library/Developer/CommandLineTools
 
   # Install pip
