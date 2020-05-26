@@ -3,14 +3,18 @@ sudo: required
 language: generic
 matrix:
   include:
-    # Mojave (Latest)
+    # Catalina (Latest)
     - os: osx
-      osx_image: xcode10.3
+      osx_image: xcode10.4
       env: ANSIBLE_VERSION='<2.9.0'
-    # Mojave (Ansible 2.7)
+    # Catalina (Ansible 2.7)
     - os: osx
       osx_image: xcode10.3
       env: ANSIBLE_VERSION='<2.8.0'
+    # Mojave
+    - os: osx
+      osx_image: xcode10.3
+      env: ANSIBLE_VERSION='<2.9.0'
     # High Sierra
     - os: osx
       osx_image: xcode10.1
