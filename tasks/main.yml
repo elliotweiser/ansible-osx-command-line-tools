@@ -74,7 +74,7 @@
     - ansible_distribution_version is version('10.15', '>=')
     - pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
   changed_when: false
-  failed_when: su_list_new.rc != 0 or su_list_new.stdout|length == 0
+  failed_when: su_list_new.stderr != 'No new software available.' and (su_list_new.rc != 0 or su_list_new.stdout|length == 0)
 
 - name: set su_list for (MacOS < 10.15).
   set_fact:
