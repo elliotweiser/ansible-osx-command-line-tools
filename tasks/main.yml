@@ -18,9 +18,9 @@
     path: '{{ clt_path }}'
   register: clt
 
-- name: Is the C++ compiler useable?
-  command: g++ --version
-  register: compiler
+- name: Is xcode-select path set?
+  command: xcode-select -p
+  register: xcode_select
   check_mode: no
   ignore_errors: true
   changed_when: false
@@ -36,7 +36,7 @@
   file:
     path: /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
     state: touch
-  when: pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
+  when: pkg_info.rc != 0 or xcode_select.rc != 0 or not clt.stat.exists
 
 - name: Check for Command Line Tools in Software Update list (MacOS < 10.15).
   shell: >
@@ -53,7 +53,7 @@
   register: su_list_old
   when:
     - ansible_distribution_version is version('10.15', '<')
-    - pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
+    - pkg_info.rc != 0 or xcode_select.rc != 0 or not clt.stat.exists
   changed_when: false
   failed_when: su_list_old.rc != 0 or su_list_old.stdout|length == 0
 
@@ -72,7 +72,7 @@
   register: su_list_new
   when:
     - ansible_distribution_version is version('10.15', '>=')
-    - pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
+    - pkg_info.rc != 0 or xcode_select.rc != 0 or not clt.stat.exists
   changed_when: false
   failed_when: su_list_new.stderr != 'No new software available.' and (su_list_new.rc != 0 or su_list_new.stdout|length == 0)
 
@@ -88,7 +88,7 @@
 
 - name: Install Command Line Tools
   command: softwareupdate -i '{{ su_list.stdout }}'
-  when: pkg_info.rc != 0 or compiler.rc != 0 or not clt.stat.exists
+  when: pkg_info.rc != 0 or xcode_select.rc != 0 or not clt.stat.exists
   notify:
     - Cleanup
   register: su_result
