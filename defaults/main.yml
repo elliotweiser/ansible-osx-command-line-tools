@@ -2,3 +2,10 @@
 # defaults file for ansible-osx-command-line-tools
 
 force_install: no
+
+# How long to wait before timing out when calling the softwareupdate tool, in seconds.
+# When defined to 0 (the default value), no timeout is applied.
+# Depending on network conditions, Apple's service status, disk usage on the host, etc.,
+# the softwareupdate tool may timeout. Commonly, rebooting or resetting certain settings
+# on the host can fix this, but that is beyond the responsibility of this role.
+softwareupdate_timeout: 0
