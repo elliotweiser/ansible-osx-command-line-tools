@@ -50,6 +50,7 @@
     tail -n1
   args:
     executable: /bin/bash
+  timeout: "{{ softwareupdate_timeout }}"
   register: su_list_old
   when:
     - ansible_distribution_version is version('10.15', '<')
@@ -69,6 +70,7 @@
     tail -n1
   args:
     executable: /bin/bash
+  timeout: "{{ softwareupdate_timeout }}"
   register: su_list_new
   when:
     - ansible_distribution_version is version('10.15', '>=')
@@ -88,6 +90,7 @@
 
 - name: Install Command Line Tools
   command: softwareupdate -i '{{ su_list.stdout }}'
+  timeout: "{{ softwareupdate_timeout }}"
   when: pkg_info.rc != 0 or xcode_select.rc != 0 or not clt.stat.exists
   notify:
     - Cleanup
