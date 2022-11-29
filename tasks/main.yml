@@ -38,6 +38,13 @@
     state: touch
   when: pkg_info.rc != 0 or xcode_select.rc != 0 or not clt.stat.exists
 
+- name: Kickstart Software Update service
+  become: true
+  command: launchctl kickstart -k system/com.apple.softwareupdated
+  check_mode: no
+  ignore_errors: true
+  changed_when: false
+
 - name: Check for Command Line Tools in Software Update list (MacOS < 10.15).
   shell: >
     set -o pipefail;
